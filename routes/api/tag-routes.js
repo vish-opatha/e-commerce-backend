@@ -16,13 +16,28 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/:id', (req, res) => {
-  // find a single tag by its `id`
-  // be sure to include its associated Product data
+router.get('/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const searchedTag = await Product.findByPk(id, {
+      include: [{ model: Category }]
+    });
+    res.status(200).json(searchedTag);
+  } catch (error) {
+    res.status(500).json(error);
+  }
 });
 
-router.post('/', (req, res) => {
-  // create a new tag
+// This is used to create a new tag by using the details
+router.post('/', async (req, res) => {
+  try {
+    const newTag = await Tag.create({
+      tag_name: req.body.tag_name
+    });
+    res.status(200).json(newTag);
+  } catch (error) {
+    res.status(500).json(error);
+  }
 });
 
 router.put('/:id', (req, res) => {
