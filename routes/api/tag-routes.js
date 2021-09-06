@@ -16,10 +16,11 @@ router.get('/', async (req, res) => {
   }
 });
 
+// This is used to retrieve one tag by a particular id
 router.get('/:id', async (req, res) => {
   try {
     const id = req.params.id;
-    const searchedTag = await Product.findByPk(id, {
+    const searchedTag = await Tag.findByPk(id, {
       include: [{ model: Category }]
     });
     res.status(200).json(searchedTag);
@@ -34,15 +35,31 @@ router.post('/', async (req, res) => {
     const newTag = await Tag.create({
       tag_name: req.body.tag_name
     });
-    res.status(200).json(newTag);
+    res.status(200).json({message: "Tag is created!"});
   } catch (error) {
     res.status(500).json(error);
   }
 });
 
-router.put('/:id', (req, res) => {
-  // update a tag's name by its `id` value
+// This is used to update the tag by using the details
+router.put('/:id', async (req, res) => {
+  try {   
+    const updatedTag = await Tag.update(
+      {
+        tag_name: req.body.tag_name
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
+    res.status(200).json({message: "Tag is updated!"});
+  } catch (error) {
+    res.status(500).json(error);
+  }
 });
+
 
 router.delete('/:id', async (req, res) => {
   try {
@@ -51,7 +68,7 @@ router.delete('/:id', async (req, res) => {
         id: req.params.id
       }
     });
-    res.status(200).json({message: "Tag is Deleted!"});
+    res.status(200).json({message: "Tag is deleted!"});
   } catch (error) {
     res.status(500).json(error);
   }
