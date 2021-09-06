@@ -16,11 +16,11 @@ router.get('/', async (req, res) => {
   }
 });
 
-// This route is used to 
-router.get('/:id', (req, res) => {
+// This route is used to get a product by its id
+router.get('/:id', async (req, res) => {
   try {
-    const  id  = req.params.id;
-    const productData = await Category.findByPk(id, {
+    const id = req.params.id;
+    const productData = await Product.findByPk(id, {
       include: [{ model: Category }, { model: Tag }]
     });
     res.status(200).json(productData);
