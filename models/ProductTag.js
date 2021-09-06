@@ -37,16 +37,3 @@ ProductTag.init(
 );
 
 module.exports = ProductTag;
-
-// **********TO DO***********
-// product_id
-
-// Integer.
-
-// References the Product model's id.
-
-// tag_id
-
-// Integer.
-
-// References the Tag model's id.
