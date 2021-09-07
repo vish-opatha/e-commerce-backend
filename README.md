@@ -19,7 +19,7 @@
   Following are the important links related to this application.
   * [E-Commerce Website - Github Repo](https://github.com/vish-opatha/e-commerce-backend)
   * [Installation - Walkthrough Video with Audio](https://drive.google.com/file/d/1-MQV_2aK166HFlk7FP7zVX21pgT9A36O/view?usp=sharing)
-  * [E-Commerce Website - Walkthrough Video with Audio]()
+  * [E-Commerce Website - Walkthrough Video with Audio](https://drive.google.com/file/d/1E5MMNHkDvnSvRicPDTRbgvy2317ejPvy/view?usp=sharing)
 
   ## Installation
   First, install the necessary dependencies, using the following command:

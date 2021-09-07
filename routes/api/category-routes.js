@@ -19,11 +19,16 @@ router.get('/', async (req, res) => {
 // This route is used to find a category by its id
 router.get('/:id', async (req, res) => {
   try {
-    const  id  = req.params.id;
+    const id  = req.params.id;
     const categoryData = await Category.findByPk(id, {
       include: [{ model: Product }]
     });
+
+    if(!categoryData){
+      res.status(404).json({message:"Category is not found"});
+    }
     res.status(200).json(categoryData);
+
   } catch (error) {
     res.status(500).json(error);
   }
@@ -50,6 +55,12 @@ router.put('/:id', async (req, res) => {
         }
       }
     );
+    
+    const a = categoryData[0];
+    if(a===0){
+      res.status(404).json({message: "Category is not found!"});
+    }
+
     res.status(200).json({message: "Category is updated!"});
   } catch (error) {
     res.status(500).json(error);
@@ -66,6 +77,11 @@ router.delete('/:id', async (req, res) => {
         }
       }
     );
+
+    if(!deletedCategory){
+      res.status(404).json({message:"Category is not found"});
+    }
+
     res.status(200).json({message: "Category is Deleted!"});
   } catch (error) {
     res.status(500).json(error);

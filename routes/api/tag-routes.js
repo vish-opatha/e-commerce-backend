@@ -23,6 +23,10 @@ router.get('/:id', async (req, res) => {
     const searchedTag = await Tag.findByPk(id, {
       include: [{ model: Product }]
     });
+
+    if(!searchedTag){
+      res.status(404).json({message:"Tag is not found"});
+    }
     res.status(200).json(searchedTag);
   } catch (error) {
     res.status(500).json(error);
@@ -68,6 +72,11 @@ router.delete('/:id', async (req, res) => {
         id: req.params.id
       }
     });
+
+    if(!deletedTag){
+      res.status(404).json({message:"Tag is not found"});
+    }
+
     res.status(200).json({message: "Tag is deleted!"});
   } catch (error) {
     res.status(500).json(error);
